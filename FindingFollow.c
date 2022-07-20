@@ -3,29 +3,10 @@
 #include"ctype.h"  
 int n=0,m=0,i=0,j=0,k=0;  
 char vGram[10][10], vFirst[5], vFollow[10];  
-int funcFirst(char);  
-int funcFirst_F(char);  
+int funcFirst(char);   
 int funcFollow(char);  
+ 
 int funcFirst(char victim){  
-  int j,i;  
-  if(!(isupper(victim)))  
-    vFirst[k++]=victim;  
-  for(j=0;j<n;j++){  
-    if(vGram[j][0]==victim){  
-     if(vGram[j][2]=='$')  
-      vFirst[k++]='$';  
-     else if(islower(vGram[j][2]))  
-      vFirst[k++]=vGram[j][2];  
-     else  
-      funcFirst(vGram[j][2]);  
-    }  
-  }  
-  printf("\n{ ");  
-  for(i=0;i<strlen(vFirst);i++)  
-  printf(" %c",vFirst[i]);  
-  printf(" }\n");  
-}  
-int funcFirst_F(char victim){  
   int j;  
   if(!(isupper(victim)))  
     vFollow[k++]=victim;  
@@ -36,7 +17,7 @@ int funcFirst_F(char victim){
       else if(islower(vGram[j][2]))  
         vFollow[k++]=vGram[j][2];  
       else  
-        funcFirst_F(vGram[j][2]);  
+        funcFirst(vGram[j][2]);  
     }  
   }  
 }  
@@ -48,7 +29,7 @@ int funcFollow(char victim){
     for(j=2;j<strlen(vGram[i]); j++){  
       if(vGram[i][j]==victim){  
         if(vGram[i][j+1]!='\0')  
-          funcFirst_F(vGram[i][j+1]);  
+          funcFirst(vGram[i][j+1]);  
         if(vGram[i][j+1]=='\0' && victim!=vGram[1][0])  
           funcFollow(vGram[i][0]);  
       }  
@@ -59,9 +40,7 @@ int funcFollow(char victim){
     printf(" %c",vFollow[g]);  
   printf(" }\n");  
   }  
-int main(){  
-  printf("\nProgram contains bug in Follow Module. ");  
-  printf("\nVisit http://www.csbeans.com/ to submit resolved one.\n\n");  
+int main(){   
   int i,z,choice,cont=1;  
   char ch, c;  
   printf("Enter the number of production : ");  
